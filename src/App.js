@@ -1,3 +1,6 @@
+window.AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+const AUTH_ENDPOINT = window.AUTH_ENDPOINT; 
+
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import spotifyLogo from "./spotify-logo.png";
@@ -85,7 +88,7 @@ function App() {
   
       const topGenre = Object.keys(genreCounts).reduce((a, b) => (genreCounts[a] > genreCounts[b] ? a : b), "");
   
-      // Genre-based savage messages
+      // Genre-based messages
       const genreMessages = {
         "rock": "You're pathetic and your ex-wife hates you. So do your kids. Comp Lampoon.",
         "indie": "You're not special or different, just weird. Also, no one likes you. Comp Lampoon.",
@@ -134,7 +137,7 @@ function App() {
             ))}
           </ul>
   
-          <h2>{genreMessage}</h2> {/* Displays the roast message */}
+          <h2>{genreMessage}</h2> {/* Displays the message */}
         </>
       )}
   

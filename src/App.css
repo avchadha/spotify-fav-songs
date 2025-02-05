@@ -1,9 +1,10 @@
 /* 🎵 Spotify-Themed Styles 🎵 */
 
 body {
-  background-color: #121212; /* Dark Spotify background */
+  background-color: #000000; /* Dark Spotify background */
   color: #1DB954; /* Spotify green text */
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-weight: 80;
   text-align: center;
   margin: 0;
   padding: 0;

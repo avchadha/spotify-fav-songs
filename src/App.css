@@ -1,0 +1,76 @@
+/* 🎵 Spotify-Themed Styles 🎵 */
+body {
+  background-color: #121212; /* Dark Spotify background */
+  color: #1DB954; /* Spotify green text */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Spotify Green Buttons */
+button, .spotify-button {
+  background-color: #1DB954;
+  color: black;
+  border: none;
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover, .spotify-button:hover {
+  background-color: #18a74b; /* Darker green on hover */
+}
+
+a.spotify-button {
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Style for the song list */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #222;
+  color: white;
+  padding: 10px;
+  margin: 10px auto;
+  width: 50%;
+  border-radius: 10px;
+}
+
+/* Message Styling */
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 20px;
+  color: white;
+}
+
+/* Center everything inside the App container */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.App-header {
+  background-color: transparent;
+  color: #1DB954;
+}

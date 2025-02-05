@@ -8,7 +8,7 @@ import lampoonLogo from "./lampoon-logo.png";
 
 const CLIENT_ID = "d5b8cebcc9614e36bc32839cb2711676";
 const REDIRECT_URI = "https://spotifyspoof.vercel.app/";
-const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+
 const RESPONSE_TYPE = "token";
 const SCOPES = "user-top-read";
 

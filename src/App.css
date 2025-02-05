@@ -30,7 +30,7 @@ button, .spotify-button {
 }
 
 button:hover, .spotify-button:hover {
-  background-color: #18a74b; /* Darker green on hover */
+  background-color: #0c5324; /* Darker green on hover */
 }
 
 a.spotify-button {
@@ -80,7 +80,7 @@ h2 {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 120px;  /* Adjust size */
+  width: 300px;  /* Adjust size */
   height: auto;
 }
 

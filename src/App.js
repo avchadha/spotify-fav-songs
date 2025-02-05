@@ -117,11 +117,11 @@ function App() {
       {/* Spotify Logo (Top Left) */}
       <img src={spotifyLogo} alt="Spotify Logo" className="spotify-logo" />
   
-      <h1>Spotify Favorite Songs</h1>
+      <h1>Spotify Taste Analyzer</h1>
   
       {!token ? (
         <a className="spotify-button" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}`}>
-          Login to Spotify
+          Log in to Spotify
         </a>
       ) : (
         <>

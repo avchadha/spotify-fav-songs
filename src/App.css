@@ -1,4 +1,5 @@
 /* 🎵 Spotify-Themed Styles 🎵 */
+
 body {
   background-color: #121212; /* Dark Spotify background */
   color: #1DB954; /* Spotify green text */
@@ -73,4 +74,23 @@ h2 {
 .App-header {
   background-color: transparent;
   color: #1DB954;
+}
+/* Spotify Logo in the Top Left */
+.spotify-logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 120px;  /* Adjust size */
+  height: auto;
+}
+
+/* Harvard Lampoon Logo at the Bottom */
+.lampoon-logo {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;  /* Adjust size */
+  height: auto;
+  opacity: 0.8;  /* Slight transparency */
 }

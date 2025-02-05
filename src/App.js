@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import spotifyLogo from "./spotify-logo.png";
+import lampoonLogo from "./lampoon-logo.png";
 
 const CLIENT_ID = "d5b8cebcc9614e36bc32839cb2711676";
 const REDIRECT_URI = "http://localhost:3000/";
@@ -111,25 +113,33 @@ function App() {
   
 
   return (
-    <div>
+    <div className="App">
+      {/* Spotify Logo (Top Left) */}
+      <img src={spotifyLogo} alt="Spotify Logo" className="spotify-logo" />
+  
       <h1>Spotify Favorite Songs</h1>
+  
       {!token ? (
-        <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}`}>
+        <a className="spotify-button" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}`}>
           Login to Spotify
         </a>
       ) : (
         <>
           <button onClick={logout}>Logout</button>
           <button onClick={getTopTracks}>Get Favorite Songs</button>
+  
           <ul>
             {topTracks.map((track) => (
               <li key={track.id}>{track.name} by {track.artists.map(artist => artist.name).join(", ")}</li>
             ))}
           </ul>
-          <h2>{genreMessage}</h2>
-
+  
+          <h2>{genreMessage}</h2> {/* Displays the roast message */}
         </>
       )}
+  
+      {/* Harvard Lampoon Logo (Bottom Center) */}
+      <img src={lampoonLogo} alt="Harvard Lampoon Logo" className="lampoon-logo" />
     </div>
   );
 }

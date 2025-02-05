@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import spotifyLogo from "./spotify-logo.png";
 import lampoonLogo from "./lampoon-logo.png";
-window.AUTH_ENDPOINT = "http://localhost:3000/";
+window.AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const AUTH_ENDPOINT = window.AUTH_ENDPOINT; 
 const CLIENT_ID = "d5b8cebcc9614e36bc32839cb2711676";
-const REDIRECT_URI = "https://spotifyspoof.vercel.app/";
+const REDIRECT_URI = "http://localhost:3000/";
 
 const RESPONSE_TYPE = "token";
 const SCOPES = "user-top-read";

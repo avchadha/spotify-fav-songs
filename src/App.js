@@ -121,7 +121,7 @@ function App() {
       <h1>Spotify Taste Analyzer</h1>
   
       {!token ? (
-        <a className="spotify-button" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}`}>
+        <a className="spotify-button" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}`}>
           Log in to Spotify
         </a>
       ) : (

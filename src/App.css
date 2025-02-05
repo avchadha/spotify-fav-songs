@@ -69,6 +69,7 @@ h2 {
   justify-content: center;
   min-height: 100vh;
   text-align: center;
+  padding-bottom: 80px; /* Add padding at the bottom */
 }
 
 .App-header {
@@ -87,10 +88,11 @@ h2 {
 /* Harvard Lampoon Logo at the Bottom */
 .lampoon-logo {
   position: fixed;
-  bottom: 10px;
+  bottom: 20px; /* Move it up slightly */
   left: 50%;
   transform: translateX(-50%);
   width: 100px;  /* Adjust size */
   height: auto;
   opacity: 0.8;  /* Slight transparency */
+  pointer-events: none; /* Prevent it from blocking interactions */
 }

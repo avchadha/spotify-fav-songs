@@ -4,7 +4,7 @@ import spotifyLogo from "./spotify-logo.png";
 import lampoonLogo from "./lampoon-logo.png";
 
 // Use environment variables (Set these in a `.env` file or directly in your hosting service)
-const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID || "your-client-id-here";
+const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID || "d5b8cebcc9614e36bc32839cb2711676";
 const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI || "http://localhost:3000/"; // Ensure this matches the registered Spotify Redirect URI
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
@@ -129,7 +129,16 @@ function App() {
 
   return (
     <div className="App">
+      {/* Spotify Logo Over Left Panel */}
       <img src={spotifyLogo} alt="Spotify Logo" className="spotify-logo" />
+
+      {/* Background Panels (1/4 screen width each) */}
+      <div className="background-container">
+        <div className="background-panel left-panel"></div>
+        <div className="background-panel right-panel"></div>
+      </div>
+
+      
       <h1>Spotify Taste Analyzer</h1>
 
       {!token ? (
@@ -151,7 +160,8 @@ function App() {
             ))}
           </ul>
 
-          <h2>{genreMessage}</h2>
+          <h2 className="roast-message">{genreMessage}</h2>
+
         </>
       )}
 

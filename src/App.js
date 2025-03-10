@@ -5,7 +5,7 @@ import lampoonLogo from "./lampoon-logo.png";
 
 // Use environment variables (Set these in a `.env` file or directly in your hosting service)
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID || "d5b8cebcc9614e36bc32839cb2711676";
-const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI || "http://localhost:3000/"; // Ensure this matches the registered Spotify Redirect URI
+const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI || "spotifyspoof.vercel.app"; // Ensure this matches the registered Spotify Redirect URI
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
 const SCOPES = "user-top-read";

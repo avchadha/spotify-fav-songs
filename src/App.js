@@ -98,7 +98,11 @@ function App() {
         }),
       });
   
-      if (!playlistResponse.ok) throw new Error("Failed to create playlist");
+      if (!playlistResponse.ok) {
+        const errorData = await playlistResponse.json();
+        console.error("Spotify API Error (Playlist Creation):", errorData);
+        throw new Error(`Failed to create playlist: ${errorData.error.message}`);
+      }
   
       const playlistData = await playlistResponse.json();
       const playlistId = playlistData.id;

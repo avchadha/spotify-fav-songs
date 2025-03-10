@@ -146,7 +146,7 @@ function App() {
   const searchChocolateRain = async () => {
     try {
       const searchResponse = await fetch(
-        `https://api.spotify.com/v1/search?q=You%20Spin%20Me%20Right%20Round%20Like%20a%20Record&type=track&limit=1`,
+        `https://api.spotify.com/v1/search?q=Circus%20Music&type=track&limit=1`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

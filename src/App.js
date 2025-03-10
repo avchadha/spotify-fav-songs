@@ -14,6 +14,7 @@ function App() {
   const [token, setToken] = useState("");
   const [topTracks, setTopTracks] = useState([]);
   const [genreMessage, setGenreMessage] = useState("");
+  const [username, setUsername] = useState(""); // NEW STUFF REMOVE IF BREAK
 
   // Handle token retrieval, validation, and expiration
   useEffect(() => {
@@ -31,6 +32,8 @@ function App() {
         window.localStorage.setItem("spotify_token", storedToken);
         window.localStorage.setItem("spotify_token_expiry", expiryTime);
         window.location.hash = "";
+
+        fetchSpotifyUserProfile(storedToken); // NEW STUFF REMOVE IF BREAK
       }
     }
 
@@ -38,6 +41,7 @@ function App() {
       logout();
     } else {
       setToken(storedToken);
+      fetchSpotifyUserProfile(storedToken); //NEW STUFF REMOVE IF BREAK
     }
   }, []);
 
@@ -46,6 +50,121 @@ function App() {
     window.localStorage.removeItem("spotify_token");
     window.localStorage.removeItem("spotify_token_expiry");
   };
+
+  const fetchSpotifyUserProfile = async (token) => { 
+    try {
+      const response = await fetch("https://api.spotify.com/v1/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      if (!response.ok) throw new Error("Failed to fetch user profile");
+  
+      const data = await response.json();
+      setUsername(data.display_name);
+      window.localStorage.setItem("spotify_username", data.display_name);
+    } catch (error) {
+      console.error("Error fetching Spotify profile:", error);
+    }
+  };
+  
+  const createChocolateRainPlaylist = async () => {
+    if (!token) {
+      console.error("No token available, please log in first.");
+      return;
+    }
+  
+    try {
+      // Step 1: Get the user's Spotify ID
+      const userResponse = await fetch("https://api.spotify.com/v1/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      if (!userResponse.ok) throw new Error("Failed to fetch user profile");
+  
+      const userData = await userResponse.json();
+      const userId = userData.id;
+  
+      // Step 2: Create a new playlist
+      const playlistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "Infinite Chocolate Rain 🌧️🎵",
+          description: "A playlist containing 100 copies of Chocolate Rain (South Park).",
+          public: false,
+        }),
+      });
+  
+      if (!playlistResponse.ok) throw new Error("Failed to create playlist");
+  
+      const playlistData = await playlistResponse.json();
+      const playlistId = playlistData.id;
+  
+      console.log("Playlist created:", playlistData.name);
+  
+      // Step 3: Find the song "Chocolate Rain" (South Park)
+      const trackUri = await searchChocolateRain();
+  
+      if (!trackUri) {
+        console.error("Could not find Chocolate Rain (South Park) on Spotify.");
+        return;
+      }
+  
+      // Step 4: Add 100 copies of the song to the new playlist
+      const trackUris = new Array(100).fill(trackUri);
+  
+      const addTrackResponse = await fetch(
+        `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ uris: trackUris }),
+        }
+      );
+  
+      if (!addTrackResponse.ok) throw new Error("Failed to add song to playlist");
+  
+      console.log("100 copies of Chocolate Rain added to playlist!");
+      alert("✅ 'Infinite Chocolate Rain' playlist created successfully!");
+    } catch (error) {
+      console.error("Error creating playlist:", error);
+      alert("❌ Failed to create playlist. Try again!");
+    }
+  };
+  
+  const searchChocolateRain = async () => {
+    try {
+      const searchResponse = await fetch(
+        `https://api.spotify.com/v1/search?q=Chocolate%20Rain%20South%20Park&type=track&limit=1`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+  
+      if (!searchResponse.ok) throw new Error("Failed to search for song");
+  
+      const searchData = await searchResponse.json();
+  
+      if (searchData.tracks.items.length === 0) {
+        console.error("No results found for Chocolate Rain (South Park)");
+        return null;
+      }
+  
+      const trackUri = searchData.tracks.items[0].uri;
+      console.log("Found song:", searchData.tracks.items[0].name);
+      return trackUri;
+    } catch (error) {
+      console.error("Error searching for song:", error);
+      return null;
+    }
+  };
+  
 
   const getTopTracks = async () => {
     if (!token) return;
@@ -152,6 +271,7 @@ function App() {
         <>
           
           <button onClick={getTopTracks}>Get Favorite Songs</button>
+          <button className="playlist-button" onClick={createChocolateRainPlaylist}>Create Infinite Chocolate Rain Playlist 🌧️🎵</button>
           <button onClick={logout}>Logout</button>
 
           <ul>

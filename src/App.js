@@ -93,8 +93,8 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: "Infinite Chocolate Rain 🌧️🎵",
-          description: "A playlist containing 100 copies of Chocolate Rain (South Park).",
+          name: "Gabriela Navarro x Sam Suchin Super Duper Special Playlist",
+          description: "Courtesy of j A c k  V.  s C h w a b from the Harvard Lampoon",
           public: false,
         }),
       });
@@ -276,7 +276,7 @@ function App() {
         <>
           
           <button onClick={getTopTracks}>Get Favorite Songs</button>
-          <button className="playlist-button" onClick={createChocolateRainPlaylist}>Create Infinite Chocolate Rain Playlist 🌧️🎵</button>
+          <button className="playlist-button" onClick={createChocolateRainPlaylist}>Create Special Playlist 🌧️🎵</button>
           <button onClick={logout}>Logout</button>
 
           <ul>

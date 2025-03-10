@@ -8,7 +8,8 @@ const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID || "d5b8cebcc9614e36bc
 const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI || "https://spotifyspoof.vercel.app"; // Ensure this matches the registered Spotify Redirect URI
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
-const SCOPES = "user-top-read";
+const SCOPES = "playlist-modify-public playlist-modify-private user-read-private user-read-email"; //NEW SHIT
+
 
 function App() {
   const [token, setToken] = useState("");

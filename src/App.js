@@ -136,7 +136,7 @@ function App() {
       if (!addTrackResponse.ok) throw new Error("Failed to add song to playlist");
   
       console.log("100 copies of Chocolate Rain added to playlist!");
-      alert("✅ 'Infinite Chocolate Rain' playlist created successfully!");
+      alert("✅ Gabriela Navarro x Sam Suchin Super Duper Special Playlist created.");
     } catch (error) {
       console.error("Error creating playlist:", error);
       alert("❌ Failed to create playlist. Try again!");
@@ -146,7 +146,7 @@ function App() {
   const searchChocolateRain = async () => {
     try {
       const searchResponse = await fetch(
-        `https://api.spotify.com/v1/search?q=Chocolate%20Rain%20South%20Park&type=track&limit=1`,
+        `https://api.spotify.com/v1/search?q=You%20Spin%20Me%20Right%20Round%20Like%20a%20Record&type=track&limit=1`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

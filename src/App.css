@@ -141,6 +141,23 @@ li {
   transition: 0.3s;
 }
 
+.playlist2-button {
+  background-color: #673AB7; /* Purple color */
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.playlist2-button:hover {
+  background-color: #4527A0; /* Darker purple on hover */
+}
+
 .playlist-button:hover {
   background-color: #4527A0; /* Darker purple on hover */
 }

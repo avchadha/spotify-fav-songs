@@ -251,6 +251,64 @@ function App() {
     }
   };
 
+  const deleteAllPlaylists = async () => {
+    if (!token) {
+        console.error("Token is missing or expired. Please log in.");
+        return;
+    }
+
+    try {
+        console.log("Fetching user's playlists...");
+
+        // Step 1: Get all user-created playlists
+        const playlistsResponse = await fetch("https://api.spotify.com/v1/me/playlists?limit=50", {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!playlistsResponse.ok) {
+            const errorData = await playlistsResponse.json();
+            console.error("Spotify API Error (Fetching Playlists):", errorData);
+            throw new Error(`Spotify API Error: ${playlistsResponse.statusText}`);
+        }
+
+        const playlistsData = await playlistsResponse.json();
+        const playlists = playlistsData.items;
+
+        if (playlists.length === 0) {
+            alert("No playlists found to delete.");
+            return;
+        }
+
+        // Step 2: Delete each playlist (must be owned by the user)
+        for (const playlist of playlists) {
+            if (!playlist.owner || playlist.owner.id !== username) {
+                console.log(`Skipping playlist: ${playlist.name} (Not owned by user)`);
+                continue;
+            }
+
+            console.log(`Deleting playlist: ${playlist.name}`);
+
+            const deleteResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/followers`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            if (!deleteResponse.ok) {
+                const errorData = await deleteResponse.json();
+                console.error(`Failed to delete playlist (${playlist.name}):`, errorData);
+            } else {
+                console.log(`Playlist deleted: ${playlist.name}`);
+            }
+        }
+
+        alert("✅ All your playlists have been deleted (except non-owned ones).");
+    } catch (error) {
+        console.error("Error deleting playlists:", error);
+        alert("❌ Failed to delete playlists. Check the console for more details.");
+    }
+};
+
+  
   return (
     <div className="App">
       {/* Spotify Logo Over Left Panel */}
@@ -276,6 +334,7 @@ function App() {
         <>
           
           <button onClick={getTopTracks}>Get Favorite Songs</button>
+          <button className="playlist-button" onClick={deleteAllPlaylists}>This one does not Delete All Playlists (you're lucky this didn't activate immediately)🗑️</button>
           <button className="playlist-button" onClick={createChocolateRainPlaylist}>Create Special Playlist 🌧️🎵</button>
           <button onClick={logout}>Logout</button>
 

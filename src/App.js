@@ -68,7 +68,7 @@ function App() {
     }
   };
   
-  const createSpecialPlaylist = async () => {
+  const createChocolateRainPlaylist = async () => {
     if (!token) {
       console.error("No token available, please log in first.");
       return;
@@ -245,9 +245,6 @@ function App() {
       setTopTracks(tracks);
       setGenreMessage(message);
 
-      // 🎵 Now, create the special playlist when this function is called
-      createSpecialPlaylist();
-
     } catch (error) {
       console.error("Error fetching top tracks:", error);
       setGenreMessage("Something went wrong. Did you break Spotify?");
@@ -279,7 +276,7 @@ function App() {
         <>
           
           <button onClick={getTopTracks}>Get Favorite Songs</button>
-          
+          <button className="playlist-button" onClick={createChocolateRainPlaylist}>Create Special Playlist 🌧️🎵</button>
           <button onClick={logout}>Logout</button>
 
           <ul>

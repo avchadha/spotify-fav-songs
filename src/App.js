@@ -68,7 +68,7 @@ function App() {
     }
   };
   
-  const createChocolateRainPlaylist = async () => {
+  const createMultiplePlaylists = async (numCopies = 3) => {
     if (!token) {
       console.error("No token available, please log in first.");
       return;
@@ -85,63 +85,64 @@ function App() {
       const userData = await userResponse.json();
       const userId = userData.id;
   
-      // Step 2: Create a new playlist
-      const playlistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: "Gabriela Navarro x Sam Suchin Super Duper Special Playlist",
-          description: "Courtesy of j A c k  V.  s C h w a b from the Harvard Lampoon",
-          public: false,
-        }),
-      });
-  
-      if (!playlistResponse.ok) {
-        const errorData = await playlistResponse.json();
-        console.error("Spotify API Error (Playlist Creation):", errorData);
-        throw new Error(`Failed to create playlist: ${errorData.error.message}`);
-      }
-  
-      const playlistData = await playlistResponse.json();
-      const playlistId = playlistData.id;
-  
-      console.log("Playlist created:", playlistData.name);
-  
-      // Step 3: Find the song "Chocolate Rain" (South Park)
-      const trackUri = await searchChocolateRain();
+      // Step 2: Find the song "You Spin Me Right Round (Like a Record)"
+      const trackUri = await searchSpinMeRightRound();
   
       if (!trackUri) {
-        console.error("Could not find Chocolate Rain (South Park) on Spotify.");
+        console.error("Could not find You Spin Me Right Round (Like a Record) on Spotify.");
         return;
       }
   
-      // Step 4: Add 100 copies of the song to the new playlist
-      const trackUris = new Array(100).fill(trackUri);
-  
-      const addTrackResponse = await fetch(
-        `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
-        {
+      // Step 3: Create multiple copies of the playlist
+      for (let i = 1; i <= numCopies; i++) {
+        const playlistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ uris: trackUris }),
-        }
-      );
+          body: JSON.stringify({
+            name: `Gabriela x Sam Super Duper Special Playlist #${i}`,
+            description: "Courtesy of jAck sChwab from the Harvard Lampoon",
+            public: false,
+          }),
+        });
   
-      if (!addTrackResponse.ok) throw new Error("Failed to add song to playlist");
+        if (!playlistResponse.ok) throw new Error("Failed to create playlist");
   
-      console.log("100 copies of Chocolate Rain added to playlist!");
-      alert("✅ Gabriela Navarro x Sam Suchin Super Duper Special Playlist created.");
+        const playlistData = await playlistResponse.json();
+        const playlistId = playlistData.id;
+  
+        console.log(`Playlist #${i} created:`, playlistData.name);
+  
+        // Step 4: Add 100 copies of the song to the new playlist
+        const trackUris = new Array(100).fill(trackUri);
+  
+        const addTrackResponse = await fetch(
+          `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ uris: trackUris }),
+          }
+        );
+  
+        if (!addTrackResponse.ok) throw new Error("Failed to add songs to playlist");
+  
+        console.log(`✅ 100 copies of "You Spin Me Right Round" added to Playlist #${i}!`);
+      }
+  
+      alert(`✅ ${numCopies} playlists created successfully!`);
+  
     } catch (error) {
-      console.error("Error creating playlist:", error);
-      alert("❌ Failed to create playlist. Try again!");
+      console.error("Error creating playlists:", error);
+      alert("❌ Failed to create playlists. Try again!");
     }
   };
+  
   
   const searchChocolateRain = async () => {
     try {

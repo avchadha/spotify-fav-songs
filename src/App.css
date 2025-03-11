@@ -129,7 +129,7 @@ li {
 
 /* 🎵 Chocolate Rain Playlist Button */
 .playlist-button {
-  background-color: #673AB7; /* Purple color */
+  background-color: #ff00e1; /* Purple color */
   color: white;
   border: none;
   padding: 15px 30px;
@@ -142,7 +142,7 @@ li {
 }
 
 .playlist2-button {
-  background-color: #673AB7; /* Purple color */
+  background-color: #ff003c; /* Purple color */
   color: white;
   border: none;
   padding: 15px 30px;
@@ -155,11 +155,11 @@ li {
 }
 
 .playlist2-button:hover {
-  background-color: #4527A0; /* Darker purple on hover */
+  background-color: #ffee00; /* Darker purple on hover */
 }
 
 .playlist-button:hover {
-  background-color: #4527A0; /* Darker purple on hover */
+  background-color: #fefeff; /* Darker purple on hover */
 }
 
 

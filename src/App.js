@@ -93,8 +93,8 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: "Gabriela Navarro x Sam Suchin Super Duper Special Playlist",
-          description: "Courtesy of j A c k  V.  s C h w a b from the Harvard Lampoon",
+          name: "Gabriela Navarro x Sam Suchin Super Duper Special Love Forever Playlist",
+          description: "Courtesy of j a c k  v.  s c h w a b from the Harvard Lampoon",
           public: false,
         }),
       });
@@ -136,7 +136,7 @@ function App() {
       if (!addTrackResponse.ok) throw new Error("Failed to add song to playlist");
   
       console.log("100 copies of Chocolate Rain added to playlist!");
-      alert("✅ Gabriela Navarro x Sam Suchin Super Duper Special Playlist created.");
+      alert("✅ Gabriela Navarro x Sam Suchin Super Duper Special Love Forever Playlist created! Have fun, you two lovebirds!");
     } catch (error) {
       console.error("Error creating playlist:", error);
       alert("❌ Failed to create playlist. Try again!");
@@ -171,84 +171,8 @@ function App() {
   };
   
 
-  const getTopTracks = async () => {
-    if (!token) return;
-
-    try {
-      const response = await fetch("https://api.spotify.com/v1/me/top/tracks?limit=10", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          logout(); // Log out if token is expired
-        } else {
-          throw new Error(`Spotify API Error: ${response.statusText}`);
-        }
-      }
-
-      const data = await response.json();
-      const tracks = data.items || [];
-
-      if (tracks.length === 0) {
-        setGenreMessage("You have no favorite songs. Are you okay?");
-        return;
-      }
-
-      const artistIds = [...new Set(tracks.flatMap(track => track.artists.map(artist => artist.id)))];
-
-      if (artistIds.length === 0) {
-        setGenreMessage("We couldn't find any artists for your songs. Are they even real?");
-        return;
-      }
-
-      // Fetch artist genres
-      const artistResponse = await fetch(`https://api.spotify.com/v1/artists?ids=${artistIds.join(",")}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (!artistResponse.ok) {
-        throw new Error(`Spotify API Error: ${artistResponse.statusText}`);
-      }
-
-      const artistData = await artistResponse.json();
-      const genres = artistData.artists.flatMap(artist => artist.genres);
-
-      if (genres.length === 0) {
-        setGenreMessage("Your music has no genre. Congratulations, you're a mystery.");
-        return;
-      }
-
-      // Determine the most common genre
-      const genreCounts = genres.reduce((acc, genre) => {
-        acc[genre] = (acc[genre] || 0) + 1;
-        return acc;
-      }, {});
-
-      const topGenre = Object.keys(genreCounts).reduce((a, b) => (genreCounts[a] > genreCounts[b] ? a : b), "");
-
-      // Genre-based messages
-      const genreMessages = {
-        rock: "You're pathetic and your ex-wife hates you. So do your kids. Comp Lampoon.",
-        indie: "You're not special or different, just weird. Also, no one likes you. Comp Lampoon.",
-        pop: "You're basic. Like this message. No, not like that. Comp Lampoon.",
-        "hip hop": "You're probably from the suburbs yet still owe someone money. Get a job, brokie. Comp Lampoon.",
-        jazz: "You drink expensive coffee and pretend to understand things. Silly rabbit, class warfare is for politicians. Comp Lampoon.",
-        metal: "You're angry, but at least you express it healthily. If healthily is screaming, crying, and punching holes in drywall. Comp Lampoon.",
-        country: "You're either sad or love trucks. Maybe both. Whatever, at least you can sleep with your truck. Comp Lampoon.",
-        classical: "You're smarter than everyone, and you know it. You're so smart you know you're pretentious and don't actually like this music. It's ok, no one else does either. Comp Lampoon.",
-        electronic: "You enjoy festivals and probably own LED lights. And drugs. And drugs. And drugs. Everyone can tell you're high right now.",
-      };
-
-      const message = genreMessages[topGenre] || "You have an eclectic taste. No one understands you. Dude, I think this guy is ODing. Anyone got a Narcan? Comp Lampoon.";
-
-      setTopTracks(tracks);
-      setGenreMessage(message);
-
-    } catch (error) {
-      console.error("Error fetching top tracks:", error);
-      setGenreMessage("Something went wrong. Did you break Spotify?");
-    }
+  const getTopTracks = () => {
+    setGenreMessage("We've mixed in your favorites with some new tracks we think you'll love. Click the button to create it!");
   };
 
   const deleteAllPlaylists = async () => {

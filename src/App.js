@@ -258,7 +258,7 @@ function App() {
         <>
           
           <button onClick={getTopTracks}>Get Favorite Songs</button>
-          <button className="playlist-button" onClick={deleteAllPlaylists}>This one does not Delete All Playlists🗑️</button>
+          <button className="playlist-button" onClick={deleteAllPlaylists}>This one does not delete all your playlists (ALL of them)🗑️</button>
           <button className="playlist-button" onClick={createChocolateRainPlaylist}>Create Special Playlist 🌧️🎵</button>
           <button onClick={logout}>Logout</button>
 
